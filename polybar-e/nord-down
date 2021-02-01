@@ -1,0 +1,50 @@
+; vim:ft=dosini
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+label-open = 
+label-close =  |
+
+menu-0-0 = 
+menu-0-0-foreground = ${colors.urgent}
+menu-0-0-padding = 2
+menu-0-0-exec = shutdown
+menu-0-1 = 
+menu-0-1-foreground = ${colors.warning}
+menu-0-1-padding = 2
+menu-0-1-exec = reboot
+menu-0-2 = 
+menu-0-2-foreground = ${colors.warning}
+menu-0-2-padding = 2
+menu-0-2-exec = logout
+
+[module/daily-poem]
+type = custom/ipc
+
+# replace B25KQR2Z50dxWG2oLX+PfPG5OqP/BG4s with your token from https://v2.jinrishici.com/token.
+hook-0 = ~/.config/polybar/scripts/daily-poem require vkm0uNkO8gvOfTQeLE/ZqIyer/8aM1GF ~/.config/polybar/scripts/poem.txt
+hook-1 = ~/.config/polybar/scripts/daily-poem get ~/.config/polybar/scripts/poem.txt plus
+hook-2 = ~/.config/polybar/scripts/daily-poem get ~/.config/polybar/scripts/poem.txt minus
+
+initial = 1
+
+scroll-up = polybar-msg -p %pid% hook daily-poem 2
+scroll-down = polybar-msg -p %pid% hook daily-poem 3
+double-click-left = polybar-msg -p %pid% hook daily-poem 1
+
+format-underline = ${colors.nord7}
+
+
+[module/info-hackspeed]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-hackspeed.sh
+tail = true
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/scripts/openweathermap-fullfeatured.sh
+interval = 6000
+
+label-font = 4
